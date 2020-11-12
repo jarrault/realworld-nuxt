@@ -65,14 +65,7 @@
             <p>Popular Tags</p>
 
             <div class="tag-list">
-              <a href="" class="tag-pill tag-default">programming</a>
-              <a href="" class="tag-pill tag-default">javascript</a>
-              <a href="" class="tag-pill tag-default">emberjs</a>
-              <a href="" class="tag-pill tag-default">angularjs</a>
-              <a href="" class="tag-pill tag-default">react</a>
-              <a href="" class="tag-pill tag-default">mean</a>
-              <a href="" class="tag-pill tag-default">node</a>
-              <a href="" class="tag-pill tag-default">rails</a>
+              <a v-for="tag in tags" :key="tag" class="tag-pill tag-default">{{ tag }}</a>
             </div>
           </div>
         </div>
@@ -80,3 +73,12 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  async asyncData ({ $axios }) {
+    const tags = (await $axios.$get('/tags')).tags
+    return { tags }
+  }
+}
+</script>
