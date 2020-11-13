@@ -7,13 +7,16 @@
         <span class="date">{{ article.createdAt | dateParse('YYYY-MM-DD HH:mm:ss') | dateFormat('MMMM DD, YYYY') }}</span>
       </div>
       <button class="btn btn-outline-primary btn-sm pull-xs-right">
-        <i class="ion-heart" /> 29
+        <i class="ion-heart" /> {{ article.favoritesCount }}
       </button>
     </div>
     <a href="" class="preview-link">
       <h1>{{ article.title }}</h1>
       <p>{{ article.description }}</p>
       <span>Read more...</span>
+      <ul class="tag-list">
+        <li v-for="tag in article.tagList" :key="tag" class="tag-default tag-pill tag-outline">{{ tag }}</li>
+      </ul>
     </a>
   </div>
 </template>

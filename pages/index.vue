@@ -31,7 +31,7 @@
             <p>Popular Tags</p>
 
             <div class="tag-list">
-              <a v-for="tag in tags" :key="tag" class="tag-pill tag-default" @click="getArticleByTag(tag)">{{ tag }}</a>
+              <a v-for="tag in tags" :key="tag" href="/#/" class="tag-pill tag-default" @click="getArticleByTag(tag)">{{ tag }}</a>
             </div>
           </div>
         </div>
@@ -46,6 +46,16 @@ export default {
     const tags = (await $axios.$get('/tags')).tags
     const articles = (await $axios.$get('/articles')).articles
     return { tags, articles }
+  },
+  data () {
+    return {
+      articles: []
+    }
+  },
+  methods: {
+    async getArticleByTag (tag) {
+      this.articles = (await this.$axios.$get(`/articles?tag=${tag}`)).articles
+    }
   }
 }
 </script>
