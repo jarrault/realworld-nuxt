@@ -35,7 +35,8 @@ export default {
     {
       src: '~/plugins/vuejs-paginate.js',
       ssr: true
-    }
+    },
+    '~/plugins/vue-markdown.js'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)

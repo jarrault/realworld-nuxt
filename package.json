@@ -14,8 +14,10 @@
     "@nuxtjs/axios": "^5.12.2",
     "@vuejs-community/vue-filter-date-format": "^1.6.3",
     "@vuejs-community/vue-filter-date-parse": "^1.1.6",
+    "babel-runtime": "^6.26.0",
     "core-js": "^3.6.5",
     "nuxt": "^2.14.6",
+    "vue-markdown": "^2.2.4",
     "vuejs-paginate": "^2.1.0"
   },
   "devDependencies": {

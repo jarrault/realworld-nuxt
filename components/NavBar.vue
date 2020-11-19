@@ -1,12 +1,12 @@
 <template>
   <nav class="navbar navbar-light">
     <div class="container">
-      <nuxt-link class="navbar-brand" to="#/">
+      <nuxt-link class="navbar-brand" to="/#/">
         conduit
       </nuxt-link>
       <ul class="nav navbar-nav pull-xs-right">
         <li class="nav-item">
-          <nuxt-link class="nav-link" to="#/">
+          <nuxt-link class="nav-link" to="/#/">
             Home
           </nuxt-link>
         </li>
@@ -22,12 +22,12 @@
         </li> -->
         <li class="nav-item">
           <nuxt-link class="nav-link" to="">
-            Sign up
+            Sign in
           </nuxt-link>
         </li>
         <li class="nav-item">
           <nuxt-link class="nav-link" to="">
-            Sign in
+            Sign up
           </nuxt-link>
         </li>
       </ul>
