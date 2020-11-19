@@ -18,7 +18,13 @@
                 <a class="nav-link disabled" href="">Your Feed</a>
               </li> -->
               <li class="nav-item">
-                <a class="nav-link active" href="">Global Feed</a>
+                <a class="nav-link" :class="{active: !currentTag}" href @click.prevent="currentTag = null">Global Feed</a>
+              </li>
+              <li v-if="currentTag" class="nav-item">
+                <a href="" class="nav-link active">
+                  <i class="ion-pound" />
+                  {{ currentTag }}
+                </a>
               </li>
             </ul>
           </div>

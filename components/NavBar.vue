@@ -10,7 +10,7 @@
             Home
           </nuxt-link>
         </li>
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <nuxt-link class="nav-link" to="">
             <i class="ion-compose" />&nbsp;New Post
           </nuxt-link>
@@ -19,10 +19,15 @@
           <nuxt-link class="nav-link" to="">
             <i class="ion-gear-a" />&nbsp;Settings
           </nuxt-link>
-        </li>
+        </li> -->
         <li class="nav-item">
           <nuxt-link class="nav-link" to="">
             Sign up
+          </nuxt-link>
+        </li>
+        <li class="nav-item">
+          <nuxt-link class="nav-link" to="">
+            Sign in
           </nuxt-link>
         </li>
       </ul>
