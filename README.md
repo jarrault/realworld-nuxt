@@ -1,5 +1,5 @@
 # ![RealWorld Example App](logo.png)
-[![Build Actions Status](https://github.com/jarrault/realworld-nuxt/workflows/Nuxt%20buil/badge.svg)](https://github.com/jarrault/realworld-nuxt/actions)
+[![Build Actions Status](https://github.com/jarrault/realworld-nuxt/workflows/Nuxt%20build/badge.svg)](https://github.com/jarrault/realworld-nuxt/actions)
 
 > ### Nuxt.js codebase containing real world examples (CRUD, auth, advanced patterns, etc) that adheres to the [RealWorld](https://github.com/gothinkster/realworld) spec and API.
 
