@@ -114,6 +114,9 @@ export default {
       this.articles = (await this.$axios.$get('/articles', {
         params: this.serverParameters
       })).articles
+    },
+    async logout () {
+      await this.$auth.logout()
     }
   }
 }

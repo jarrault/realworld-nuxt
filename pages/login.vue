@@ -12,9 +12,7 @@
             </nuxt-link>
           </p>
 
-          <ul v-for="error in formattedErrors" :key="error" class="error-messages">
-            <li>{{ error }}</li>
-          </ul>
+          <auth-errors :errors="errors" />
 
           <form @submit.prevent="login">
             <fieldset class="form-group">
@@ -44,21 +42,14 @@
 </template>
 
 <script>
+import AuthErrors from '../components/AuthErrors.vue'
 export default {
+  components: { AuthErrors },
   data () {
     return {
       email: '',
       password: '',
       errors: null
-    }
-  },
-  computed: {
-    formattedErrors () {
-      if (this.errors) {
-        return Object.keys(this.errors).map(key => `${key} ${this.errors[key]}`)
-      }
-
-      return ''
     }
   },
   methods: {

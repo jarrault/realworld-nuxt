@@ -12,13 +12,12 @@
             </nuxt-link>
           </p>
 
-          <!-- <ul class="error-messages">
-            <li>That email is already taken</li>
-          </ul> -->
+          <auth-errors :errors="errors" />
 
-          <form>
+          <form @submit.prevent="register">
             <fieldset class="form-group">
               <input
+                v-model="username"
                 class="form-control form-control-lg"
                 type="text"
                 placeholder="Your Name"
@@ -26,13 +25,15 @@
             </fieldset>
             <fieldset class="form-group">
               <input
+                v-model="email"
                 class="form-control form-control-lg"
-                type="text"
+                type="email"
                 placeholder="Email"
               >
             </fieldset>
             <fieldset class="form-group">
               <input
+                v-model="password"
                 class="form-control form-control-lg"
                 type="password"
                 placeholder="Password"
@@ -47,3 +48,40 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      username: '',
+      email: '',
+      password: '',
+      errors: null
+    }
+  },
+  methods: {
+    async register () {
+      try {
+        await this.$axios.$post('users', {
+          user: {
+            email: this.email,
+            username: this.username,
+            password: this.password
+          }
+        })
+
+        await this.$auth.loginWith('local', {
+          data: {
+            user: {
+              email: this.email,
+              password: this.password
+            }
+          }
+        })
+      } catch (e) {
+        this.errors = e.response.data.errors
+      }
+    }
+  }
+}
+</script>
