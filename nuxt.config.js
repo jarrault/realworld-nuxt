@@ -51,12 +51,33 @@ export default {
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
     // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
     baseURL: 'https://conduit.productionready.io/api'
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/users/login', method: 'post', propertyName: 'user.token' },
+          user: { url: '/user', method: 'get', propertyName: 'user' },
+          logout: false
+        },
+        tokenType: 'Token'
+      }
+    },
+    redirect: {
+      home: '/'
+    }
+  },
+
+  router: {
+    mode: 'hash'
   },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
