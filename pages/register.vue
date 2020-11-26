@@ -12,7 +12,7 @@
             </nuxt-link>
           </p>
 
-          <auth-errors :errors="errors" />
+          <errors :errors="errors" />
 
           <form @submit.prevent="register">
             <fieldset class="form-group">

@@ -78,9 +78,9 @@ export default {
     }
   },
 
-  router: {
-    mode: 'hash'
-  },
+  // router: {
+  //   mode: 'hash'
+  // },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {

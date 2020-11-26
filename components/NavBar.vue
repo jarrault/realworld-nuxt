@@ -16,7 +16,7 @@
           </nuxt-link>
         </li>
         <li class="nav-item">
-          <nuxt-link class="nav-link" to="">
+          <nuxt-link class="nav-link" to="/settings">
             <i class="ion-gear-a" />&nbsp;Settings
           </nuxt-link>
         </li>

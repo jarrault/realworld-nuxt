@@ -12,7 +12,7 @@
             </nuxt-link>
           </p>
 
-          <auth-errors :errors="errors" />
+          <errors :errors="errors" />
 
           <form @submit.prevent="login">
             <fieldset class="form-group">
@@ -42,9 +42,7 @@
 </template>
 
 <script>
-import AuthErrors from '../components/AuthErrors.vue'
 export default {
-  components: { AuthErrors },
   data () {
     return {
       email: '',
