@@ -55,8 +55,10 @@
 export default {
   async asyncData ({ params, $axios }) {
     const slug = params.slug
+
     const article = (await $axios.$get(`/articles/${slug}`)).article
     const comments = (await $axios.$get(`/articles/${slug}/comments`)).comments
+
     return { article, comments }
   }
 }

@@ -21,7 +21,7 @@
           </nuxt-link>
         </li>
         <li class="nav-item">
-          <nuxt-link class="nav-link" to="">
+          <nuxt-link class="nav-link" :to="{ name: 'profile-username', params: { username: loggedInUser.username }}">
             {{ loggedInUser.username }}
           </nuxt-link>
         </li>
