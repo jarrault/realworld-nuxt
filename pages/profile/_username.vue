@@ -1,5 +1,3 @@
-// TODO Refactor favorites and index (duplication of code)
-
 <template>
   <div class="profile-page">
     <div class="user-info">
@@ -29,12 +27,10 @@
           <div class="articles-toggle">
             <ul class="nav nav-pills outline-active">
               <li class="nav-item">
-                <nuxt-link class="nav-link" href :to="{name: 'profile-username', params: { username: user.username }}">
-                  My Articles</a>
-                </nuxt-link>
+                <a class="nav-link" :class="{'active' : !favorited}" href @click.prevent="updateArticles()">My Articles</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href>
+                <a class="nav-link" :class="{'active' : favorited}" href @click.prevent="updateArticles()">
                   Favorited Articles</a>
                 </a>
               </li>
@@ -53,21 +49,45 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   async asyncData ({ params, $axios }) {
     const username = params.username
     const user = (await $axios.$get(`/profiles/${username}`)).profile
-    const articles = (await $axios.$get(`/articles?favorited=${username}&limit=5&offset=0`)).articles
+    const articles = (await $axios.$get(`/articles?author=${username}&limit=5&offset=0`)).articles
 
     return { user, articles }
   },
+  data () {
+    return {
+      favorited: false,
+      articlesCount: 0,
+      page: 1
+    }
+  },
   computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser']),
     isCurrentUser () {
       if (!this.isAuthenticated) {
         return false
       }
 
       return this.user.username === this.loggedInUser.username
+    }
+  },
+  methods: {
+    async updateArticles () {
+      let type = 'author'
+
+      if (!this.favorited) {
+        type = 'favorited'
+        this.favorited = true
+      } else {
+        this.favorited = false
+      }
+
+      this.articles = (await this.$axios.$get(`/articles?${type}=${this.user.username}&limit=5&offset=0`)).articles
     }
   }
 }
