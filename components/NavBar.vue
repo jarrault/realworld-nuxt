@@ -11,7 +11,7 @@
           </nuxt-link>
         </li>
         <li class="nav-item">
-          <nuxt-link class="nav-link" to="">
+          <nuxt-link class="nav-link" to="/editor">
             <i class="ion-compose" />&nbsp;New Article
           </nuxt-link>
         </li>
