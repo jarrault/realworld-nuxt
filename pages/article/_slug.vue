@@ -53,7 +53,7 @@
               Sign up
             </nuxt-link> to add comments on this article.
           </p>
-          <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
+          <comment v-for="comment in comments" :key="comment.id" :comment="comment" :slug="article.slug" @delete="removeComment($event)" />
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+    ...mapGetters(['isAuthenticated'])
   },
   methods: {
     async addComment () {
@@ -93,6 +93,9 @@ export default {
       } catch (e) {
         this.errors = e.response.data.errors
       }
+    },
+    removeComment (comment) {
+      this.comments.pop(comment)
     }
   }
 }
