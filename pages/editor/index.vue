@@ -58,14 +58,14 @@ export default {
     },
     async createArticle () {
       try {
-        const article = (await this.$axios.post('/articles', {
+        const article = (await this.$axios.$post('/articles', {
           article: {
             title: this.title,
             body: this.body,
             description: this.description,
             tagList: this.tagList
           }
-        })).data.article
+        })).article
 
         this.$router.push(`/article/${article.slug}`)
       } catch (e) {

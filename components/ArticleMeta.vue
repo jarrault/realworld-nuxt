@@ -36,8 +36,12 @@ export default {
     }
   },
   computed: {
-    ...mapGetters(['loggedInUser']),
+    ...mapGetters(['isAuthenticated', 'loggedInUser']),
     isAuthorOfTheArticle () {
+      if (!this.isAuthenticated) {
+        return false
+      }
+
       return this.article.author.username === this.loggedInUser.username
     }
   },

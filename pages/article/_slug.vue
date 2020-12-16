@@ -32,18 +32,27 @@
 
       <div class="row">
         <div class="col-xs-12 col-md-8 offset-md-2">
-          <p><a href="#/login">Sign in</a> or <a ui-sref="app.register" href="#/register">sign up</a> to add comments on this article.</p>
-          <!-- <form class="card comment-form">
-            <div class="card-block">
-              <textarea class="form-control" placeholder="Write a comment..." rows="3" />
-            </div>
-            <div class="card-footer">
-              <img src="http://i.imgur.com/Qr71crq.jpg" class="comment-author-img">
-              <button class="btn btn-sm btn-primary">
-                Post Comment
-              </button>
-            </div>
-          </form> -->
+          <div v-if="isAuthenticated">
+            <errors :errors="errors" />
+            <form class="card comment-form" @submit.prevent="addComment()">
+              <div class="card-block">
+                <textarea v-model="commentBody" class="form-control" placeholder="Write a comment..." rows="3" />
+              </div>
+              <div class="card-footer">
+                <img ng-src="" class="comment-author-img">
+                <button class="btn btn-sm btn-primary" type="submit">
+                  Post Comment
+                </button>
+              </div>
+            </form>
+          </div>
+          <p v-else>
+            <nuxt-link to="/login">
+              Sign in
+            </nuxt-link> or <nuxt-link to="/register">
+              Sign up
+            </nuxt-link> to add comments on this article.
+          </p>
           <comment v-for="comment in comments" :key="comment.id" :comment="comment" />
         </div>
       </div>
@@ -52,6 +61,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 export default {
   async asyncData ({ params, $axios }) {
     const slug = params.slug
@@ -60,6 +70,30 @@ export default {
     const comments = (await $axios.$get(`/articles/${slug}/comments`)).comments
 
     return { article, comments }
+  },
+  data () {
+    return {
+      commentBody: '',
+      errors: null
+    }
+  },
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+  },
+  methods: {
+    async addComment () {
+      try {
+        const comment = (await this.$axios.$post(`/articles/${this.article.slug}/comments`, {
+          comment: {
+            body: this.commentBody
+          }
+        })).comment
+
+        this.comments.push(comment)
+      } catch (e) {
+        this.errors = e.response.data.errors
+      }
+    }
   }
 }
 </script>
