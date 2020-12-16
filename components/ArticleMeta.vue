@@ -5,7 +5,10 @@
       <a href="" class="author">{{ article.author.username }}</a>
       <span class="date">{{ article.createdAt | dateParse('YYYY-MM-DD HH:mm:ss') | dateFormat('MMMM D, YYYY') }}</span>
     </div>
-    <button class="btn btn-sm btn-outline-secondary">
+    <nuxt-link v-if="isAuthorOfTheArticle" class="btn btn-outline-secondary btn-sm" :to="{ name: 'editor-slug', params: { slug: article.slug }}">
+      <i class="ion-edit" /> Edit Article
+    </nuxt-link>
+    <button v-else class="btn btn-sm btn-outline-secondary">
       <i class="ion-plus-round" />
       &nbsp; Follow {{ article.author.username }}
       <span v-if="article.author.following" class="counter">({{ article.author.following }})</span>
