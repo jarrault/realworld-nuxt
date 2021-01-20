@@ -16,9 +16,9 @@
     <button v-if="isAuthorOfTheArticle" class="btn btn-outline-danger btn-sm" @click="deleteArticle()">
       <i class="ion-trash-a" /> Delete Article
     </button>
-    <button v-else class="btn btn-sm btn-outline-primary">
+    <button v-else class="btn btn-sm btn-outline-primary" @click="toggleFavorite()">
       <i class="ion-heart" />
-      &nbsp; Favorite Article
+      <span v-if="!article.favorited">Favorite</span><span v-else>Unfavorite</span> Article
       <span class="counter">({{ article.favoritesCount }})</span>
     </button>
   </div>
@@ -51,12 +51,17 @@ export default {
     },
     async toggleFollow () {
       if (!this.article.author.following) {
-        await this.$axios.post(`/profiles/${this.article.author.username}/follow`)
+        this.article.author.following = (await this.$axios.$post(`/profiles/${this.article.author.username}/follow`)).profile.following
       } else {
-        await this.$axios.delete(`/profiles/${this.article.author.username}/follow`)
+        this.article.author.following = (await this.$axios.$delete(`/profiles/${this.article.author.username}/follow`)).profile.following
       }
-
-      this.article.author.following = !this.article.author.following
+    },
+    async toggleFavorite () {
+      if (!this.article.favorited) {
+        this.article = (await this.$axios.$post(`/articles/${this.article.slug}/favorite`)).article
+      } else {
+        this.article = (await this.$axios.$delete(`/articles/${this.article.slug}/favorite`)).article
+      }
     }
   }
 }
